@@ -25,25 +25,25 @@ type SearchResults []struct {
 
 type ComicResult struct {
 	Comic struct {
-		ID                 int    `json:"id"`
-		Title              string `json:"title"`
-		Country            string `json:"country"`
-		Status             int    `json:"status"`
-		LastChapter        string `json:"last_chapter"`
-		Demographic        int    `json:"demographic"`
-		Mdid               int    `json:"mdid"`
-		Hentai             bool   `json:"hentai"`
-		VerificationStatus int    `json:"verification_status"`
-		UserFollowCount    int    `json:"user_follow_count"`
-		FollowRank         int    `json:"follow_rank"`
-		CommentCount       int    `json:"comment_count"`
-		FollowCount        int    `json:"follow_count"`
-		Desc               string `json:"desc"`
-		Parsed             string `json:"parsed"`
-		Slug               string `json:"slug"`
-		Year               int    `json:"year"`
-		BayesianRating     string `json:"bayesian_rating"`
-		RatingCount        int    `json:"rating_count"`
+		ID                 int     `json:"id"`
+		Title              string  `json:"title"`
+		Country            string  `json:"country"`
+		Status             int     `json:"status"`
+		LastChapter        float32 `json:"last_chapter"`
+		Demographic        int     `json:"demographic"`
+		Mdid               int     `json:"mdid"`
+		Hentai             bool    `json:"hentai"`
+		VerificationStatus int     `json:"verification_status"`
+		UserFollowCount    int     `json:"user_follow_count"`
+		FollowRank         int     `json:"follow_rank"`
+		CommentCount       int     `json:"comment_count"`
+		FollowCount        int     `json:"follow_count"`
+		Desc               string  `json:"desc"`
+		Parsed             string  `json:"parsed"`
+		Slug               string  `json:"slug"`
+		Year               int     `json:"year"`
+		BayesianRating     string  `json:"bayesian_rating"`
+		RatingCount        int     `json:"rating_count"`
 		RelateFrom         []struct {
 			RelateTo struct {
 				Slug  string `json:"slug"`
@@ -168,11 +168,11 @@ type Chapter struct {
 	Status       string      `json:"status"`
 	Mseid        interface{} `json:"mseid"`
 	MdComics     struct {
-		ID          int    `json:"id"`
-		Title       string `json:"title"`
-		Country     string `json:"country"`
-		Slug        string `json:"slug"`
-		LastChapter string `json:"last_chapter"`
+		ID          int     `json:"id"`
+		Title       string  `json:"title"`
+		Country     string  `json:"country"`
+		Slug        string  `json:"slug"`
+		LastChapter float32 `json:"last_chapter"`
 		Links       struct {
 			Al    string `json:"al"`
 			Ap    string `json:"ap"`
@@ -318,11 +318,11 @@ type SearchArgs struct {
 
 type TopResult struct {
 	Rank []struct {
-		Slug        string `json:"slug"`
-		Title       string `json:"title"`
-		Demographic int    `json:"demographic"`
-		Genres      []int  `json:"genres"`
-		LastChapter string `json:"last_chapter"`
+		Slug        string  `json:"slug"`
+		Title       string  `json:"title"`
+		Demographic int     `json:"demographic"`
+		Genres      []int   `json:"genres"`
+		LastChapter float32 `json:"last_chapter"`
 		MdCovers    []struct {
 			W     int    `json:"w"`
 			H     int    `json:"h"`
@@ -412,7 +412,7 @@ type TopResult struct {
 		Genres      []int       `json:"genres"`
 		CreatedAt   time.Time   `json:"created_at"`
 		UploadedAt  time.Time   `json:"uploaded_at"`
-		LastChapter string      `json:"last_chapter"`
+		LastChapter float32     `json:"last_chapter"`
 		MdCovers    []struct {
 			W     int    `json:"w"`
 			H     int    `json:"h"`
