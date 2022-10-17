@@ -308,7 +308,10 @@ type SearchArgs struct {
 	// From year.
 	From int
 	// To year.
-	To        int
+	To int
+	// Tachiyomi is required for third party software.
+	Tachiyomi bool
+	// completed translation
 	Completed bool
 	// Sort has the following values: "view", "uploaded", "rating", "follow"
 	Sort string
