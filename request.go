@@ -255,9 +255,23 @@ func (g Gom) GetHot() []Chapter {
 	return res
 }
 
-// GetTrending returns the current first page of the trending list.
-func (g Gom) GetTrending() TopResult {
-	body := request(g.Client, BaseUrl+"/top")
+// GetTrending returns the current first page of the trending list. Gender has to be either 1 or 2, day 180, 270, 360, 720.
+func (g Gom) GetTrending(gender int, day int, typeQuery string) TopResult {
+	url := BaseUrl + "/top"
+
+	if gender == 1 || gender == 2 {
+		url += "?gender=" + strconv.Itoa(gender)
+	}
+
+	if day == 180 || day == 270 || day == 360 || day == 720 {
+		url += "&day=" + strconv.Itoa(day)
+	}
+
+	if typeQuery != "" {
+		url += "&type=" + typeQuery
+	}
+
+	body := request(g.Client, url)
 
 	var res TopResult
 	jsonErr := json.Unmarshal(body, &res)
