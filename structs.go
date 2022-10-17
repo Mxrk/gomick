@@ -317,6 +317,8 @@ type SearchArgs struct {
 	Sort string
 	// Q contains the title to search.
 	Q string
+	// Include alt title for show only.
+	T bool
 }
 
 type TopResult struct {
