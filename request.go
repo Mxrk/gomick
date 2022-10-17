@@ -98,6 +98,10 @@ func (g Gom) Search(args SearchArgs) SearchResults {
 		v.Add("to", strconv.Itoa(args.To))
 	}
 
+	if args.Tachiyomi != false {
+		v.Add("tachiyomi", strconv.FormatBool(args.Tachiyomi))
+	}
+
 	if args.Sort != "" {
 		v.Add("sort", args.Sort)
 	}
