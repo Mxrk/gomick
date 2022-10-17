@@ -423,3 +423,18 @@ type TopResult struct {
 		} `json:"md_covers"`
 	} `json:"completions"`
 }
+
+type LookupRequest struct {
+	Mal     []int `json:"mal"`
+	Anilist []int `json:"anilist"`
+}
+type LookupResult struct {
+	Mal struct {
+		Num14511 string `json:"14511"`
+		Num44511 string `json:"44511"`
+	} `json:"mal"`
+	Anilist struct {
+		Num44511 string `json:"44511"`
+		Num74511 string `json:"74511"`
+	} `json:"anilist"`
+}

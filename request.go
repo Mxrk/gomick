@@ -1,6 +1,7 @@
 package gomick
 
 import (
+	"bytes"
 	"encoding/json"
 	"io/ioutil"
 	"log"
@@ -312,6 +313,14 @@ func (g Gom) GetImages(hid string) []string {
 	return pages
 }
 
+func (g Gom) ComicLookup(lr LookupRequest) string {
+	jsonValue, _ := json.Marshal(lr)
+
+	body := postRequest(g.Client, BaseUrl+"/comic/lookup", jsonValue)
+
+	return string(body)
+}
+
 func prepareSearchQuery(query string) string {
 	replacedQuery := strings.ReplaceAll(query, " ", "+")
 
@@ -320,6 +329,45 @@ func prepareSearchQuery(query string) string {
 
 func request(client http.Client, url string) []byte {
 	req, err := http.NewRequest(http.MethodGet, url, nil)
+	if err != nil {
+		log.Println(err)
+	}
+
+	req.Header.Set("User-Agent", userAgent)
+
+	res, getErr := client.Do(req)
+	if getErr != nil {
+		log.Println(getErr)
+	}
+
+	defer res.Body.Close()
+
+	remainingLimit := res.Header.Get("x-ratelimit-remaining")
+	remainingLimitInt, err := strconv.Atoi(remainingLimit)
+	if err != nil {
+		log.Println(err)
+	}
+
+	if remainingLimitInt == 1 {
+		tillReset := res.Header.Get("x-ratelimit-reset")
+		tillResetInt, err := strconv.Atoi(tillReset)
+		if err != nil {
+			log.Println(err)
+		}
+
+		time.Sleep(time.Duration(tillResetInt) * time.Second)
+	}
+
+	body, readErr := ioutil.ReadAll(res.Body)
+	if readErr != nil {
+		log.Println(readErr)
+	}
+
+	return body
+}
+
+func postRequest(client http.Client, url string, body []byte) []byte {
+	req, err := http.NewRequest(http.MethodGet, url, bytes.NewBuffer(body))
 	if err != nil {
 		log.Println(err)
 	}
