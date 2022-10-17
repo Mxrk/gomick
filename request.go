@@ -111,6 +111,10 @@ func (g Gom) Search(args SearchArgs) SearchResults {
 		v.Add("q", args.Q)
 	}
 
+	if args.T != false {
+		v.Add("t", strconv.FormatBool(args.T))
+	}
+
 	body := request(g.Client, BaseUrl+"/search"+v.Encode())
 
 	results := SearchResults{}
